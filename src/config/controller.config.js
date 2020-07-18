@@ -8,10 +8,12 @@ const CONTROLLER_PATH = path.resolve(Config.controllers);
 const MSCResult = MSCConstructor(CONTROLLER_PATH);
 
 Object.keys(MSCResult).forEach(controller => {
-  Object.keys(controller).forEach(method => {
-    controller[method] = async ctx => {
+  Object.keys(MSCResult[controller]).forEach(method => {
+    const _ = MSCResult[controller][method];
+    MSCResult[controller][method] = null;
+    MSCResult[controller][method] = async ctx => {
       try {
-        await controller[method](ctx);
+        await _(ctx);
       } catch (error) {
         logger(error.message, LOGGER_TYPE.ERROR);
         return (ctx.body = {
