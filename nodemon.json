@@ -1,0 +1,12 @@
+{
+  "restartable": "rs",
+  "ignore": [],
+  "verbose": true,
+  "execMap": {},
+  "events": {},
+  "ext": "js json",
+  "watch": [
+    "./server/**"
+  ],
+  "legacy-watch": false
+}
