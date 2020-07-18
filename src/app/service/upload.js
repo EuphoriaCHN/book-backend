@@ -1,6 +1,8 @@
 class UploadService {
   async uploadKeywordExcel(keywordObjectWithJSONObject) {
-    return await this.ctx.model.keywordAssociation.bulkCreate(keywordObjectWithJSONObject, { updateOnDuplicate: ["keyword"] });
+    return await this.ctx.model.keywordAssociation.bulkCreate(keywordObjectWithJSONObject, {
+      updateOnDuplicate: ["keyword"]
+    });
   }
 }
 

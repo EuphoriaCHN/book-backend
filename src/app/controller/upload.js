@@ -30,7 +30,7 @@ class UploadController {
     });
 
     // 送入 Service 进行 bulkCreate
-    await ctx.service.upload.uploadKeywordExcel(keywordObjectWithJSONObject);
+    // await ctx.service.upload.uploadKeywordExcel(keywordObjectWithJSONObject);
 
     ctx.body = {
       status_code: STATUS_CODE.SUCCESS,

@@ -39,6 +39,11 @@ Object.assign(app, {
 });
 logger('Bind Controller to Application', LOGGER_TYPE.SUCCESS);
 
+app.use((ctx, next) => {
+  logger(`${ctx.req.method} ${ctx.request.ip} ${ctx.request.path}`, LOGGER_TYPE.LOG);
+  next();
+});
+
 Router(app);
 
 const run = async () => {

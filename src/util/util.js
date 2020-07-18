@@ -5,6 +5,7 @@ const LOGGER_TYPE = {
   ERROR: 'ERROR',
   WARNING: 'WARNING',
   SUCCESS: 'SUCCESS',
+  ROUTER: 'ROUTER',
 
   LOG: 'LOG'
 };
@@ -21,6 +22,9 @@ const logger = (text, type = LOGGER_TYPE.INFO) => {
       break;
     case LOGGER_TYPE.SUCCESS:
       console.log(`${chalk.green('[SUCCESS]')} ${text}`);
+      break;
+    case LOGGER_TYPE.ROUTER:
+      console.log(`${chalk.gray('[ROUTER]')} ${text}`);
       break;
     default:
       console.log(`${chalk.gray('[LOG]')} ${text}`);
