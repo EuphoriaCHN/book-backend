@@ -17,19 +17,19 @@ module.exports = function(sequelize, DataTypes) {
     },
     asso1: {
       type: DataTypes.STRING(128),
-      allowNull: false,
+      allowNull: true,
       comment: '联想词 1',
       field: 'asso_1'
     },
     asso2: {
       type: DataTypes.STRING(128),
-      allowNull: false,
+      allowNull: true,
       comment: '联想词 2',
       field: 'asso_2'
     },
     asso3: {
       type: DataTypes.STRING(128),
-      allowNull: false,
+      allowNull: true,
       comment: '联想词 3',
       field: 'asso_3'
     }
