@@ -4,6 +4,10 @@ class UploadService {
       updateOnDuplicate: ["keyword"]
     });
   }
+
+  async uploadBooksExcel(bookObjectWithJSONObject) {
+    return await this.ctx.model.chapter.bulkCreate(bookObjectWithJSONObject);
+  }
 }
 
 module.exports = new UploadService();
