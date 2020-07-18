@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-  host: '192.144.135.131',
+  host: '106.52.123.113',
   port: 3306,
   database: 'book_system',
   userName: 'book_system',

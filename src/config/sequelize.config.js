@@ -27,9 +27,9 @@ const sequelize = new Sequelize(database, userName, password, {
 
 const Database = {
   sequelize,
-  connect: () => {
+  connect: async () => {
     logger('👉 开始连接数据库...', LOGGER_TYPE.LOG);
-    sequelize
+    return sequelize
       .authenticate()
       .then(() => {
         logger('📖 数据库连接成功', LOGGER_TYPE.SUCCESS);

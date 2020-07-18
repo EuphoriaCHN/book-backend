@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "./node_modules/.bin/cross-env NODE_ENV=development nodemon --config ./nodemon.json ./server/index.js",
+    "dev": "./node_modules/.bin/cross-env NODE_ENV=development nodemon --config ./nodemon.json ./src/index.js",
     "pulldb": "./node_modules/.bin/sequelize-auto -h 106.52.123.113 -d book_system -u book_system -x AkdY2h7H57Grw66e -p 3306 -o ./src/app/model -a ./sequelize-auto.config.json -C"
   },
   "repository": {
@@ -26,6 +26,7 @@
     "koa-router": "^9.1.0",
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
+    "node-xlsx": "^0.15.0",
     "sequelize": "^6.3.3",
     "sequelize-auto": "^0.5.2"
   }

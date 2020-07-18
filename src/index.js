@@ -1,3 +1,6 @@
+const makeGlobal = require('./util/global');
+makeGlobal(global);
+
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const { logger, LOGGER_TYPE } = require('./util/util');
@@ -38,8 +41,12 @@ logger('Bind Controller to Application', LOGGER_TYPE.SUCCESS);
 
 Router(app);
 
-app.listen(Config.port, () => {
-  logger(`🚀 服务在 ${Config.port} 端口上启动成功～`, LOGGER_TYPE.SUCCESS);
+const run = async () => {
+  await Database.connect();
 
-  Database.connect();
-});
+  app.listen(Config.port, () => {
+    logger(`🚀 服务在 ${Config.port} 端口上启动成功～`, LOGGER_TYPE.SUCCESS);
+  });
+};
+
+run();

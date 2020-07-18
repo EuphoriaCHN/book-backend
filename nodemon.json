@@ -6,7 +6,7 @@
   "events": {},
   "ext": "js json",
   "watch": [
-    "./server/**"
+    "./src/**"
   ],
   "legacy-watch": false
 }

@@ -1,5 +1,5 @@
 class IndexController {
-  async index(ctx) {
+  index = async ctx => {
     ctx.body = {
       data: await ctx.service.index.index(),
     };
