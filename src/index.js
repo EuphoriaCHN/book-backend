@@ -39,9 +39,9 @@ Object.assign(app, {
 });
 logger('Bind Controller to Application', LOGGER_TYPE.SUCCESS);
 
-app.use((ctx, next) => {
+app.use(async (ctx, next) => {
   logger(`${ctx.req.method} ${ctx.request.ip} ${ctx.request.path}`, LOGGER_TYPE.LOG);
-  next();
+  await next();
 });
 
 Router(app);
