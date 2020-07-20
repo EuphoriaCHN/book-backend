@@ -8,11 +8,12 @@ class BookController {
    * @param {number} limit
    */
   getBookList = async ctx => {
-    const { offset, limit } = ctx.request.query;
+    const { offset, limit, searchText } = ctx.request.query;
 
     const data = await ctx.service.books.getBookList({
       offset: parseInt(offset),
-      limit: parseInt(limit)
+      limit: parseInt(limit),
+      searchText
     });
 
     return (ctx.body = {
