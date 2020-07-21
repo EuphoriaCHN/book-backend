@@ -7,8 +7,9 @@ const LOGGER_TYPE = {
   SUCCESS: 'SUCCESS',
   ROUTER: 'ROUTER',
 
-  LOG: 'LOG'
+  LOG: 'LOG',
 };
+
 const logger = (text, type = LOGGER_TYPE.INFO) => {
   switch (type) {
     case LOGGER_TYPE.INFO:
@@ -25,6 +26,15 @@ const logger = (text, type = LOGGER_TYPE.INFO) => {
       break;
     case LOGGER_TYPE.ROUTER:
       console.log(`${chalk.gray('[ROUTER]')} ${text}`);
+      break;
+    case HTTP_STATUS_CODE.SUCCESS:
+      console.log(`${chalk.green('[200]')} ${text}`);
+      break;
+    case HTTP_STATUS_CODE.NOT_FOUND:
+      console.log(`${chalk.red('[404]')} ${text}`);
+      break;
+    case HTTP_STATUS_CODE.INTERNAL_ERROR:
+      console.log(`${chalk.red('[500]')} ${text}`);
       break;
     default:
       console.log(`${chalk.gray('[LOG]')} ${text}`);

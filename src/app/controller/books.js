@@ -16,6 +16,11 @@ class BookController {
       searchText
     });
 
+    // 查询关键字
+    const keywordList = await ctx.service.keyword.getKeyword(searchText);
+
+    data.keyword = keywordList;
+
     return (ctx.body = {
       status_code: STATUS_CODE.SUCCESS,
       data

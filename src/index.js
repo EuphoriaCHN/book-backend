@@ -1,8 +1,12 @@
 const makeGlobal = require('./util/global');
 makeGlobal(global);
 
+const path = require('path');
+
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
+const KoaStatic = require('koa-static');
+
 const { logger, LOGGER_TYPE } = require('./util/util');
 
 const Config = require('./config/project.config');
@@ -16,6 +20,7 @@ const Model = require('./config/models.config');
 const app = new Koa();
 
 app.use(bodyParser());
+app.use(KoaStatic(path.resolve(__dirname, 'static')));
 
 // 给每个 Service 上添加 App 上下文
 // 实现在 Service 中直接 this.ctx
@@ -42,6 +47,19 @@ logger('Bind Controller to Application', LOGGER_TYPE.SUCCESS);
 app.use(async (ctx, next) => {
   logger(`${ctx.req.method} ${ctx.request.ip} ${ctx.request.path}`, LOGGER_TYPE.LOG);
   await next();
+  switch (ctx.response.status) {
+    case HTTP_STATUS_CODE.SUCCESS:
+      logger(`${ctx.req.method} ${ctx.request.ip} ${ctx.request.path}`, HTTP_STATUS_CODE.SUCCESS);
+      break;
+    case HTTP_STATUS_CODE.NOT_FOUND:
+      logger(`${ctx.req.method} ${ctx.request.ip} ${ctx.request.path}`, HTTP_STATUS_CODE.NOT_FOUND);
+      break;
+    case HTTP_STATUS_CODE.INTERNAL_ERROR:
+      logger(`${ctx.req.method} ${ctx.request.ip} ${ctx.request.path}`, LOGGER_TYPE.INTERNAL_ERROR);
+      break;
+    default:
+      console.log(`[${ctx.response.status}] ${ctx.req.method} ${ctx.request.ip} ${ctx.request.path}`);
+  }
 });
 
 Router(app);
