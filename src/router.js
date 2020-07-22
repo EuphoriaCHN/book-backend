@@ -10,5 +10,7 @@ module.exports = app => {
   router.get('/upload/uploadBooksExcel', controller.upload.uploadBooksExcel);
   router.get('/upload/uploadKeywordExcel', controller.upload.uploadKeywordExcel);
 
+  router.get('/', controller.index.index);
+
   return app.use(router.routes()).use(router.allowedMethods());
 };

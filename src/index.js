@@ -6,6 +6,7 @@ const path = require('path');
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const KoaStatic = require('koa-static');
+const KoaView = require('koa-view');
 
 const { logger, LOGGER_TYPE } = require('./util/util');
 
@@ -20,6 +21,7 @@ const Model = require('./config/models.config');
 const app = new Koa();
 
 app.use(bodyParser());
+app.use(KoaView(path.resolve(Config.view)));
 app.use(KoaStatic(path.resolve(__dirname, 'static')));
 
 // 给每个 Service 上添加 App 上下文

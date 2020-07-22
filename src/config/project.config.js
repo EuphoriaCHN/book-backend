@@ -14,4 +14,5 @@ module.exports = {
   controllers: path.resolve(APP_PATH, 'controller'),
   services: path.resolve(APP_PATH, 'service'),
   models: path.resolve(APP_PATH, 'model'),
+  view: path.resolve(APP_PATH, '..', 'static', 'dist')
 };
