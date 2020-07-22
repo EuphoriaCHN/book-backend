@@ -14,7 +14,8 @@ class BookService {
       limit,
       offset,
       group: 'book_id',
-      where: {}
+      where: {},
+      order: [['id', 'asc']]
     };
 
     if (searchText) {
@@ -37,21 +38,6 @@ class BookService {
     }
 
     return await this.ctx.model.chapter.findAndCountAll(condition);
-  }
-
-  /**
-   * 按照关键字模糊查询
-   */
-  async getKeyword(text) {
-    const { Op } = Sequelize;
-
-    return await this.ctx.model.keywordAssociation.find({
-      where: {
-        keyword: {
-          [Op.like]: `%${text}%`
-        }
-      }
-    });
   }
 }
 
