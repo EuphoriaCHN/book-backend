@@ -15,8 +15,8 @@ const sequelize = new Sequelize(database, userName, password, {
   host,
   port,
   dialect: 'mysql',
-  // logging: console.log, // 开启日志
-  logging: false, // 关闭日志
+  logging: console.log, // 开启日志
+  // logging: false, // 关闭日志
   omitNull: true, // 将 undefined 转换为 NULL
   // 连接池配置
   pool: {

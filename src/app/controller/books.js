@@ -26,6 +26,25 @@ class BookController {
       data
     });
   };
+
+  /**
+   * 根据 ID 获取书籍详细信息
+   * 
+   * @param {string | number} id 书籍 id
+   */
+  getBookById = async ctx => {
+    const { id } = ctx.request.query;
+
+    assert(id, 'Book id is required parameter!');
+    assert(`${id}`.length >= 4, 'Invalied book id!');
+
+    const data = await ctx.service.books.getBookById(`${id}`.slice(0, 4));
+
+    return (ctx.body = {
+      status_code: STATUS_CODE.SUCCESS,
+      data
+    });
+  };
 }
 
 module.exports = new BookController();
