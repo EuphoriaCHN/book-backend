@@ -1,14 +1,18 @@
 const Router = require('koa-router');
 
-module.exports = app => {
+module.exports = (app) => {
   const router = new Router();
   const { controller } = app;
 
   router.get('/book/getBookList', controller.books.getBookList);
   router.get('/book/getBookById', controller.books.getBookById);
+  router.get('/book/getOneBook', controller.books.getOneBook);
 
   router.get('/upload/uploadBooksExcel', controller.upload.uploadBooksExcel);
-  router.get('/upload/uploadKeywordExcel', controller.upload.uploadKeywordExcel);
+  router.get(
+    '/upload/uploadKeywordExcel',
+    controller.upload.uploadKeywordExcel
+  );
 
   router.get('/', controller.index.index);
 
