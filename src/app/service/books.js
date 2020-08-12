@@ -67,8 +67,9 @@ class BookService {
    * 获取一本书
    *
    * @param {string} address 按照 address 模糊搜索
+   * @param {string | number} bookId 按照 book id 搜索
    */
-  async getOneBook({ address }) {
+  async getOneBook({ address, bookId }) {
     const { Op } = Sequelize;
 
     const condition = {};
@@ -77,6 +78,11 @@ class BookService {
       condition.address = {
         [Op.like]: `%${address}%`,
       };
+    }
+
+    if (bookId && `${bookId}`.length > 4) {
+      bookId = `${bookId}`.slice(0, 4);
+      condition.bookId = bookId;
     }
 
     return await this.ctx.model.chapter.findOne({

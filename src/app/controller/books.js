@@ -56,11 +56,27 @@ class BookController {
    * @param {string | number} bookId 按照 book id 搜索
    */
   getOneBook = async (ctx) => {
-    const data = await ctx.service.books.getOneBook(ctx.request.query);
+    const { address, bookId } = ctx.request.query;
+
+    const data = await ctx.service.books.getOneBook({
+      address,
+      bookId,
+    });
+
+    // 如果有了书本 ID 限制，那么就再搜寻一次不带限制的
+    let withOutId = null;
+    if (bookId) {
+      withOutId = await ctx.service.books.getOneBook({
+        address,
+      });
+    }
 
     return (ctx.body = {
       status_code: STATUS_CODE.SUCCESS,
-      data,
+      data: {
+        target: data,
+        other: withOutId,
+      },
     });
   };
 }
