@@ -53,8 +53,8 @@ class BookController {
    * 获取一个章节
    *
    * @param {string} address 按照 address 模糊搜索
-   * @param {string | number} bookId 按照 book id 搜索
-   * @param {string | number} chapterId 按照章节 id 搜索
+   * @param {string} bookId 按照 book id 搜索
+   * @param {string} chapterId 按照章节 id 搜索
    */
   getOneChapter = async (ctx) => {
     const { address, bookId, chapterId } = ctx.request.query;
@@ -89,6 +89,28 @@ class BookController {
         target: data,
         other: withOutId,
       },
+    });
+  };
+
+  /**
+   * 模糊搜寻章节
+   *
+   * @param {string} searchText 搜索章节名称 or 关键词搜索
+   * @param {string} limit
+   * @param {string} offset
+   */
+  getChapter = async (ctx) => {
+    const { searchText = '', limit = 10, offset = 0 } = ctx.request.query;
+
+    const data = await ctx.service.books.getChapter({
+      searchText,
+      limit: parseInt(limit),
+      offset: parseInt(offset),
+    });
+
+    return (ctx.body = {
+      status_code: STATUS_CODE.SUCCESS,
+      data,
     });
   };
 }

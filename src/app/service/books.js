@@ -99,6 +99,51 @@ class BookService {
       where: condition,
     });
   }
+
+  /**
+   * 模糊搜寻章节
+   *
+   * @param {string} searchText 搜索章节名称 or 关键词搜索
+   * @param {string} limit
+   * @param {string} offset
+   */
+  async getChapter({ searchText, limit, offset }) {
+    const { Op } = Sequelize;
+
+    const condition = {
+      limit,
+      offset,
+      where: {},
+    };
+
+    condition.where[Op.or] = [];
+    // 可以按照书名、关键字搜索
+    // 也可以按照书的章节进行搜索
+    condition.where[Op.or].push(
+      {
+        address: {
+          [Op.like]: `煤矿通用知识教材/%${searchText}%.pdf`,
+        },
+      },
+      {
+        keyword_1: {
+          [Op.like]: `%${searchText}%`,
+        },
+      },
+      {
+        keyword_2: {
+          [Op.like]: `%${searchText}%`,
+        },
+      },
+      {
+        keyword_3: {
+          [Op.like]: `%${searchText}%`,
+        },
+      }
+    );
+
+    return await this.ctx.model.chapter.findAndCountAll(condition);
+  }
 }
 
 module.exports = new BookService();

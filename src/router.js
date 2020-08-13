@@ -6,6 +6,7 @@ module.exports = (app) => {
 
   router.get('/book/getBookList', controller.books.getBookList);
   router.get('/book/getBookById', controller.books.getBookById);
+  router.get('/book/getChapter', controller.books.getChapter);
   router.get('/book/getOneChapter', controller.books.getOneChapter);
 
   router.get('/upload/uploadBooksExcel', controller.upload.uploadBooksExcel);
