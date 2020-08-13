@@ -64,12 +64,22 @@ class BookService {
   }
 
   /**
-   * 获取一本书
+   * 获取一个章节
    *
    * @param {string} address 按照 address 模糊搜索
    * @param {string | number} bookId 按照 book id 搜索
+   * @param {string | number} chapterId 按照章节 id 搜索
    */
-  async getOneBook({ address, bookId }) {
+  async getOneChapter({ address, bookId, chapterId }) {
+    // 根据 id 精确搜索
+    if (chapterId) {
+      return await this.ctx.model.chapter.findOne({
+        where: {
+          id: chapterId,
+        },
+      });
+    }
+
     const { Op } = Sequelize;
 
     const condition = {};
